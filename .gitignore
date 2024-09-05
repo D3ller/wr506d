@@ -1,0 +1,10 @@
+
+###> symfony/framework-bundle ###
+/wr506d/.env.local
+/wr506d/.env.local.php
+/wr506d/.env.*.local
+/wr506d/config/secrets/prod/prod.decrypt.private.php
+/wr506d/public/bundles/
+/wr506d/var/
+/wr506d/vendor/
+###< symfony/framework-bundle ###
