@@ -12,7 +12,7 @@ class ProductController extends AbstractController
     public function listProducts(): Response
     {
         return $this->render('product/list.html.twig', [
-            'title' => 'Liste des produits',
+            'title' => '(Total) Liste des produits',
         ]);
     }
 
@@ -20,7 +20,7 @@ class ProductController extends AbstractController
     public function viewProduct(string $id): Response
     {
         return $this->render('product/view.html.twig', [
-            'title' => "Affichage du produit $id",
+            'title' => "Affichage du produit - $id",
         ]);
     }
 }
