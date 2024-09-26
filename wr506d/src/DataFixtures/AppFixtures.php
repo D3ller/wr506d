@@ -47,6 +47,7 @@ class AppFixtures extends Fixture
             $movie->setDirector($faker->name());
             $movie->setReleaseDate($faker->dateTimeThisCentury());
             $movie->setCreatedAt(new DateTimeImmutable());
+
             $movie->setRating($faker->randomFloat(1, 0, 5));
 
             shuffle($createdActors);
