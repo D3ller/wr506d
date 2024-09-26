@@ -1,7 +1,7 @@
 api_platform:
     graphql:
         enabled: true
-    title: Hello API Platform
+    title: On est WR506
     version: 1.0.0
     show_webby: false
     formats:
@@ -18,5 +18,5 @@ api_platform:
         extra_properties:
             standard_put: true
             rfc_7807_compliant_errors: true
-    keep_legacy_inflector: false
+#    inflector: true
     use_symfony_listeners: true
