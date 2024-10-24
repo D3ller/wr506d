@@ -13,6 +13,7 @@ api_platform:
         html: ['text/html']
     defaults:
         stateless: true
+        pagination_client_items_per_page: true
         cache_headers:
             vary: ['Content-Type', 'Authorization', 'Origin']
         extra_properties:
@@ -20,3 +21,11 @@ api_platform:
             rfc_7807_compliant_errors: true
 #    inflector: true
     use_symfony_listeners: true
+    collection:
+        pagination:
+            items_per_page_parameter_name: itemsPerPage # Default value
+    swagger:
+        api_keys:
+            JWT:
+                name: Authorization
+                type: header
