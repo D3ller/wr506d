@@ -2,16 +2,20 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\ActorRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ActorRepository::class)]
 #[ORM\HasLifecycleCallbacks]
 #[ApiResource]
+#[ApiFilter(SearchFilter::class, properties: ['firstname' => 'partial', 'lastname' => 'partial'])]
 class Actor
 {
     #[ORM\Id]
@@ -20,24 +24,32 @@ class Actor
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotNull]
+    #[Assert\Length(min: 2, max: 255, minMessage: 'Le nom doit contenir au moins 2 caractères', maxMessage: 'Le nom doit contenir au maximum 255 caractères')]
     private ?string $lastname = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Length(min: 2, max: 255, minMessage: 'Le prénom doit contenir au moins 2 caractères', maxMessage: 'Le prénom doit contenir au maximum 255 caractères')]
     private ?string $firstname = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dob = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotNull]
+    #[Assert\Country(message: 'Le pays doit être un code ISO 3166-1 alpha-2')]
     private ?string $nationality = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $media = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotNull]
+    #[Assert\Choice(choices: ['homme', 'femme'], message: 'Le genre doit être homme, femme')]
     private ?string $gender = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\Range(notInRangeMessage: 'Le nombre de récompenses doit être compris entre {{ min }} et {{ max }}', min: 0, max: 100)]
     private ?int $awards = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]

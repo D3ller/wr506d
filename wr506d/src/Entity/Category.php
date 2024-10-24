@@ -86,8 +86,7 @@ class Category
     }
 
     #[ORM\PrePersist]
-
-    public function setCreatedAt(\DateTimeImmutable $created_at): static
+    public function setCreatedAt(): static
     {
         $this->created_at = new \DateTimeImmutable();
 
