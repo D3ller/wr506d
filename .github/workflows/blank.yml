@@ -5,7 +5,7 @@
 
 name: Symfony + PHP - WR506D
 
-on:
+on: 
   push:
     branches: [ "develop","main" ]
   pull_request:
