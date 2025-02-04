@@ -8,14 +8,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use ApiPlatform\Metadata\ApiFilter;
-use ApiPlatform\Doctrine\Orm\Filter\BooleanFilter;
-use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
-use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: MovieRepository::class)]
-#[ApiFilter(SearchFilter::class, properties: ['title' => 'partial'])]
-#[ApiFilter(BooleanFilter::class, properties: ['online'])]
 #[ApiResource]
 class Movie
 {
@@ -43,7 +37,6 @@ class Movie
     private ?int $entries = null;
 
     #[ORM\Column(nullable: true)]
-    #[Assert\Range(notInRangeMessage: 'La note doit être compris entre 0 et 5', min: 0, max: 5)]
     private ?float $rating = null;
 
     #[ORM\Column(nullable: true)]
@@ -66,9 +59,6 @@ class Movie
      */
     #[ORM\ManyToMany(targetEntity: Actor::class, mappedBy: 'movies')]
     private Collection $actors;
-
-    #[ORM\Column]
-    private ?bool $online = null;
 
     public function __construct()
     {
@@ -251,18 +241,6 @@ class Movie
         if ($this->actors->removeElement($actor)) {
             $actor->removeMovie($this);
         }
-
-        return $this;
-    }
-
-    public function isOnline(): ?bool
-    {
-        return $this->online;
-    }
-
-    public function setOnline(bool $online): static
-    {
-        $this->online = $online;
 
         return $this;
     }
