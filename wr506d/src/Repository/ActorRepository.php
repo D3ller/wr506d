@@ -16,14 +16,6 @@ class ActorRepository extends ServiceEntityRepository
         parent::__construct($registry, Actor::class);
     }
 
-    public function countActors(): int
-    {
-        return $this->createQueryBuilder('a')
-            ->select('COUNT(a.id)')
-            ->getQuery()
-            ->getSingleScalarResult();
-    }
-
     //    /**
     //     * @return Actor[] Returns an array of Actor objects
     //     */
